@@ -1,35 +1,19 @@
-# Nikhil Hide Photos Calculator
+# Nikhil Hide Photos Calculator — Android starter
 
-A lightweight, installable web app that looks like a calculator and opens a private gallery after a PIN is entered.
+This is a native Android project. It is separate from the GitHub Pages website.
 
-## Features
-- Calculator-style front screen with Nikhil branding.
-- First launch: enter a PIN of 4–12 digits and tap `=`.
-- Later launches: enter the same PIN and tap `=`.
-- Add images and videos; files are encrypted with AES-GCM before storage.
-- PIN-derived encryption key uses PBKDF2-SHA-256 (250,000 iterations).
-- Data is stored in this browser's IndexedDB on this device.
-- Installable PWA with offline app-shell caching.
+## Build an APK using GitHub Actions
+1. Upload the contents of this folder into the root of your existing GitHub repository (keep the `.github` folder).
+2. Open the repository's **Actions** tab.
+3. Choose **Build Android APK** and press **Run workflow**, or push a commit that changes app files.
+4. Open the completed workflow run and download the artifact named `Nikhil-Hide-Photos-Calculator-debug`.
+5. Extract the artifact ZIP on your Android phone and install `app-debug.apk`. Android may ask you to allow installs from that source.
 
-## Run / publish
-1. Create a new GitHub repository named `nikhil-hide-photos-calculator`.
-2. Upload all files from this folder to the repository root.
-3. In GitHub, open **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**, branch `main`, folder `/ (root)`, then Save.
-5. Open the Pages URL over HTTPS.
-
-## Important privacy and recovery notes
-- This is a browser-based vault, not a native Android app. It stores encrypted copies in the browser's local storage database; it does not automatically remove originals from the phone gallery.
-- Use the app only on a trusted device and keep the device locked. Anyone with access to the unlocked browser session can view the vault.
-- Clearing browser data, uninstalling the browser, or losing the device can permanently delete the vault. There is no PIN reset or cloud recovery. Export/backup functionality is not included in this starter version.
-- If you forget the PIN, the encrypted files cannot be recovered. Keep the PIN safe.
-- Serve over HTTPS (GitHub Pages does this) because Web Crypto and service workers require a secure context.
-- Test with non-sensitive sample files first.
-
-## Project files
-- `index.html` — app structure
-- `style.css` — interface
-- `app.js` — calculator, PIN, encryption, gallery logic
-- `manifest.webmanifest` — installable PWA metadata
-- `sw.js` — offline app shell
-- `icon.svg` — app icon
+## Important
+- This is a starter implementation. Test it with non-sensitive sample photos first.
+- Photos are encrypted with AES-GCM using an Android Keystore key and stored in app-private storage.
+- PIN verification uses PBKDF2-HMAC-SHA256.
+- After import, the app asks Android to show a system deletion confirmation for the original image (Android 11+). If Android cannot approve deletion, the original stays in Gallery and must be removed manually.
+- Android uninstall, clearing app data, device reset, or loss of the Keystore key can make vault photos unrecoverable. Export/back up important photos before such actions.
+- The starter can open and export imported photos, but does not yet include a full thumbnail gallery, cloud backup, or PIN recovery workflow.
+- No photos are uploaded to a server.
